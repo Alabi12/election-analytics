@@ -1,0 +1,52 @@
+<h1>Candidates</h1>
+<%= link_to 'New Candidate', new_candidate_path, class: 'btn btn-primary' %>
+
+<h2>Presidential Candidates</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Party</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @presidential_candidates.each do |candidate| %>
+      <tr>
+        <td><%= candidate.name %></td>
+        <td><%= candidate.party %></td>
+        <td>
+          <%= link_to 'Show', candidate %> |
+          <%= link_to 'Edit', edit_candidate_path(candidate) %> |
+          <%= link_to 'Delete', candidate, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Parliamentary Candidates</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Party</th>
+      <th>Constituency</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @parliamentary_candidates.each do |candidate| %>
+      <tr>
+        <td><%= candidate.name %></td>
+        <td><%= candidate.party %></td>
+        <td><%= candidate.constituency.name %></td>
+        <td>
+          <%= link_to 'Show', candidate %> |
+          <%= link_to 'Edit', edit_candidate_path(candidate) %> |
+          <%= link_to 'Delete', candidate, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

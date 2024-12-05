@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_05_180726) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_05_181911) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_05_180726) do
     t.bigint "constituency_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "candidate_type"
     t.index ["constituency_id"], name: "index_candidates_on_constituency_id"
   end
 

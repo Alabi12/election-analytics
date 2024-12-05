@@ -1,0 +1,25 @@
+<h1>Constituencies</h1>
+<%= link_to 'New Constituency', new_constituency_path, class: 'btn btn-primary' %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Region</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @constituencies.each do |constituency| %>
+      <tr>
+        <td><%= constituency.name %></td>
+        <td><%= constituency.region %></td>
+        <td>
+          <%= link_to 'Show', constituency %> |
+          <%= link_to 'Edit', edit_constituency_path(constituency) %> |
+          <%= link_to 'Delete', constituency, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
