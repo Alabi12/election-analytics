@@ -1,0 +1,50 @@
+<!-- app/views/home/index.html.erb -->
+<div class="container">
+  <div class="row mt-5">
+    <!-- Constituencies Section -->
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Constituencies</h5>
+          <p class="card-text">Manage constituencies and their candidates.</p>
+          <%= link_to 'View Constituencies', constituencies_path, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Candidates Section -->
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Candidates</h5>
+          <p class="card-text">Add, update, and view candidates in each constituency.</p>
+          
+          <!-- Link to Candidates in Each Constituency -->
+          <% Constituency.all.each do |constituency| %>
+            <div class="mb-2">
+              <%= link_to "View Candidates for #{constituency.name}", constituency_candidates_path(constituency), class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Analysis Section -->
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Data Analysis</h5>
+          <p class="card-text">Analyze and generate reports based on election data.</p>
+          <%= link_to 'View Analysis', '#', class: 'btn btn-primary' %> <!-- Update this link if you have an analysis page -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2 class="mt-5">Welcome to the Election Analytics App</h2>
+      <p>This system helps you manage constituencies, candidates, and analyze election results efficiently.</p>
+    </div>
+  </div>
+</div>
