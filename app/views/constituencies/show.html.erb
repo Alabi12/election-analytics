@@ -1,0 +1,8 @@
+<h1 class="my-4"><%= @constituency.name %></h1>
+
+<p><strong>Region:</strong> <%= @constituency.region %></p>
+
+<div class="btn-group">
+  <%= link_to 'Back to Constituencies', constituencies_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Edit', edit_constituency_path(@constituency), class: 'btn btn-primary' %>
+</div>
