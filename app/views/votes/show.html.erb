@@ -1,0 +1,4 @@
+<h1><%= @candidate.name %></h1>
+<p>Party: <%= @candidate.party %></p>
+<p>Total Votes: <%= @candidate.votes.sum(:vote_count) %></p>
+<%= link_to 'Manage Votes', candidate_votes_path(@candidate), class: 'btn btn-info' %>

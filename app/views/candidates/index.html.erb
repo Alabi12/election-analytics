@@ -4,30 +4,15 @@
     <tr>
       <th>Name</th>
       <th>Party</th>
-      <th>Constituency</th> <!-- Added this column -->
+      <th>Constituency</th>
+      <th>Vote</th>
       <th>Image</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @presidential_candidates.each do |candidate| %>
-      <tr>
-        <td><%= candidate.name %></td>
-        <td><%= candidate.party %></td>
-        <td><%= candidate.constituency.name %></td> <!-- Display the constituency name -->
-        <td>
-          <% if candidate.image.attached? %>
-            <%= image_tag candidate.image, size: "50x50" %> <!-- Display the uploaded image -->
-          <% else %>
-            <p>No image uploaded</p>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to 'Show', constituency_candidate_path(@constituency, candidate) %> |
-          <%= link_to 'Edit', edit_constituency_candidate_path(@constituency, candidate) %> |
-          <%= link_to 'Delete', constituency_candidate_path(@constituency, candidate), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
+      <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
     <% end %>
   </tbody>
 </table>
@@ -39,29 +24,14 @@
       <th>Name</th>
       <th>Party</th>
       <th>Constituency</th>
+      <th>Vote</th>
       <th>Image</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @parliamentary_candidates.each do |candidate| %>
-      <tr>
-        <td><%= candidate.name %></td>
-        <td><%= candidate.party %></td>
-        <td><%= candidate.constituency.name %></td>
-        <td>
-          <% if candidate.image.attached? %>
-            <%= image_tag candidate.image, size: "50x50" %> <!-- Display the uploaded image -->
-          <% else %>
-            <p>No image uploaded</p>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to 'Show', constituency_candidate_path(@constituency, candidate) %> |
-          <%= link_to 'Edit', edit_constituency_candidate_path(@constituency, candidate) %> |
-          <%= link_to 'Delete', constituency_candidate_path(@constituency, candidate), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
+      <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
     <% end %>
   </tbody>
 </table>

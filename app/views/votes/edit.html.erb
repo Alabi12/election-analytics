@@ -1,0 +1,29 @@
+<h1><%= action_name.capitalize %> Vote for <%= @candidate.name %></h1>
+
+<%= form_with(model: [@candidate, @vote], local: true) do |form| %>
+  <% if @vote.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
+      <ul>
+        <% @vote.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.hidden_field :candidate_id, value: @candidate.id %>
+    <p>Candidate Name: <strong><%= @candidate.name %></strong></p>
+  </div>
+
+  <div class="field">
+    <%= form.label :vote_count, "Number of Votes" %>
+    <%= form.number_field :vote_count, class: 'form-control', min: 0 %>
+  </div>
+
+  <div class="actions mt-3">
+    <%= form.submit class: 'btn btn-primary' %>
+    <%= link_to 'Back', candidate_votes_path(@candidate), class: 'btn btn-secondary' %>
+  </div>
+<% end %>

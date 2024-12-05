@@ -1,0 +1,18 @@
+<tr>
+  <td><%= candidate.name %></td>
+  <td><%= candidate.party %></td>
+  <td><%= candidate.constituency.name %></td>
+  <td id="candidate_<%= candidate.id %>_votes"><%= candidate.votes.count %></td>
+  <td>
+    <% if candidate.image.attached? %>
+      <%= image_tag candidate.image, size: "50x50" %>
+    <% else %>
+      <p>No image uploaded</p>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to 'Show', constituency_candidate_path(candidate.constituency, candidate) %> |
+    <%= link_to 'Edit', edit_constituency_candidate_path(candidate.constituency, candidate) %> |
+    <%= link_to 'Delete', constituency_candidate_path(candidate.constituency, candidate), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </td>
+</tr>
