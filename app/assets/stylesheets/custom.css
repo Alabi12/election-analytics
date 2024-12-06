@@ -12,3 +12,146 @@ h1 {
 .table th, .table td {
   vertical-align: middle;
 }
+
+/* admin dashboard */
+/* Custom Styling for Admin Dashboard */
+
+.admin-dashboard {
+  max-width: 960px; /* Limit the width to avoid overly stretched layout */
+  margin: 0 auto; /* Center align the content */
+}
+
+.dashboard-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #343a40; /* Dark text for better readability */
+  margin-bottom: 30px;
+}
+
+.button-group .btn {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 30px;
+  border-radius: 8px; /* Rounded corners for a modern look */
+  transition: all 0.3s ease;
+}
+
+/* Custom Button Styling */
+.custom-btn {
+  background-color: #f8f9fa;
+  color: #495057; /* Darker text for better contrast */
+  border: 1px solid #ccc;
+}
+
+.custom-btn:hover {
+  background-color: #e2e6ea;
+  color: #212529;
+  border-color: #b8c2cc;
+}
+
+.custom-btn-main {
+  background-color: #007bff; /* Blue color for primary button */
+  color: white;
+  padding: 14px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.custom-btn-main:hover {
+  background-color: #0056b3; /* Darker blue when hovered */
+  color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 2rem;
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+/* Custom Styling for Admin Dashboard */
+.container {
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.btn-lg {
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.shadow-lg {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom Styling */
+.table {
+  background-color: #ffffff;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+.btn-primary, .btn-info, .btn-warning, .btn-danger {
+  border-radius: 5px;
+}
+
+.btn-primary:hover, .btn-info:hover, .btn-warning:hover, .btn-danger:hover {
+  opacity: 0.9;
+}
+
+/* Custom Styles for Form */
+.form-control:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+}
+
+.invalid-feedback {
+  display: none;
+  font-size: 0.875rem;
+  color: #dc3545;
+}
+
+.needs-validation:invalid .form-control {
+  border-color: #dc3545;
+}
+
+.needs-validation:invalid .invalid-feedback {
+  display: block;
+}
+
+/* In your CSS file */
+.hover-link:hover {
+  background-color: #007bff;  /* Bootstrap primary color */
+  color: white;
+  text-decoration: none;  /* Removes underline on hover */
+}

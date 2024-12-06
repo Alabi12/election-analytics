@@ -21,11 +21,12 @@ Rails.application.routes.draw do
       patch 'add_vote', on: :member # Add a route to update vote_count
     end
   end
-
+  
   # Routes for the dashboards
   get 'admin_dashboard', to: 'dashboards#admin_dashboard', as: 'admin_dashboard'
   get 'party_agent_dashboard', to: 'dashboards#party_agent_dashboard'
 
+  resources :party_agents
 
   resources :votes, only: [:create]
   resources :candidates do

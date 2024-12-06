@@ -5,14 +5,21 @@
   <td id="candidate_<%= candidate.id %>_votes"><%= candidate.votes.sum(:vote_count) %></td>
   <td>
     <% if candidate.image.attached? %>
-      <%= image_tag candidate.image, size: "50x50" %>
+      <%= image_tag candidate.image, class: "img-thumbnail", style: "width: 50px; height: 50px;" %>
     <% else %>
-      <p>No image uploaded</p>
+      <span class="text-muted fst-italic">No image uploaded</span>
     <% end %>
   </td>
   <td>
-    <%= link_to 'Show', constituency_candidate_path(candidate.constituency, candidate) %> |
-    <%= link_to 'Edit', edit_constituency_candidate_path(candidate.constituency, candidate) %> |
-    <%= link_to 'Delete', constituency_candidate_path(candidate.constituency, candidate), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <div class="d-flex justify-content-around">
+      <%= link_to 'Show', constituency_candidate_path(candidate.constituency, candidate), 
+                  class: 'btn btn-info btn-sm text-white' %>
+      <%= link_to 'Edit', edit_constituency_candidate_path(candidate.constituency, candidate), 
+                  class: 'btn btn-warning btn-sm text-dark' %>
+      <%= link_to 'Delete', constituency_candidate_path(candidate.constituency, candidate), 
+                  method: :delete, 
+                  data: { confirm: 'Are you sure?' }, 
+                  class: 'btn btn-danger btn-sm' %>
+    </div>
   </td>
 </tr>

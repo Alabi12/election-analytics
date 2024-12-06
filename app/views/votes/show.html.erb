@@ -1,4 +1,13 @@
-<h1><%= @candidate.name %></h1>
-<p>Party: <%= @candidate.party %></p>
-<p>Total Votes: <%= @candidate.votes.sum(:vote_count) %></p>
-<%= link_to 'Manage Votes', candidate_votes_path(@candidate), class: 'btn btn-info' %>
+<div class="container my-5">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <!-- Candidate Information -->
+      <h1 class="text-primary"><%= @candidate.name %></h1>
+      <p class="mb-2"><strong>Party:</strong> <%= @candidate.party %></p>
+      <p class="mb-4"><strong>Total Votes:</strong> <%= @candidate.votes.sum(:vote_count) %></p>
+
+      <!-- Manage Votes Button -->
+      <%= link_to 'Manage Votes', candidate_votes_path(@candidate), class: 'btn btn-info btn-sm shadow-sm' %>
+    </div>
+  </div>
+</div>

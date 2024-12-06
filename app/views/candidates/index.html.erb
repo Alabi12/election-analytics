@@ -1,41 +1,50 @@
-<h2>Presidential Candidates</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Party</th>
-      <th>Constituency</th>
-      <th>Vote</th>
-      <th>Image</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @presidential_candidates.each do |candidate| %>
-      <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
-    <% end %>
-  </tbody>
-</table>
+<div class="container my-5">
+  <!-- Presidential Candidates -->
+  <section class="mb-5">
+    <h2 class="text-primary mb-3">Presidential Candidates</h2>
+    <table class="table table-bordered table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Party</th>
+          <th>Constituency</th>
+          <th>Votes</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @presidential_candidates.each do |candidate| %>
+          <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
 
-<h2>Parliamentary Candidates</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Party</th>
-      <th>Constituency</th>
-      <th>Vote</th>
-      <th>Image</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @parliamentary_candidates.each do |candidate| %>
-      <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
-    <% end %>
-  </tbody>
-</table>
+  <!-- Parliamentary Candidates -->
+  <section>
+    <h2 class="text-primary mb-3">Parliamentary Candidates</h2>
+    <table class="table table-bordered table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Party</th>
+          <th>Constituency</th>
+          <th>Votes</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @parliamentary_candidates.each do |candidate| %>
+          <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
 
-<div class="mt-3">
-  <%= link_to 'Create New Candidate', new_constituency_candidate_path(@constituency), class: 'btn btn-success' %>
+  <!-- Create New Candidate Button -->
+  <div class="text-center mt-4">
+    <%= link_to 'Create New Candidate', new_constituency_candidate_path(@constituency), class: 'btn btn-success btn-lg px-4 shadow-sm' %>
+  </div>
 </div>
