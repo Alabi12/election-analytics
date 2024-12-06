@@ -1,11 +1,17 @@
 class CandidatesController < ApplicationController
   before_action :set_constituency
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :add_vote]
 
-  # GET /constituencies/:constituency_id/candidates
   def index
-    @presidential_candidates = @constituency.candidates.where(candidate_type: 'Presidential')
-    @parliamentary_candidates = @constituency.candidates.where(candidate_type: 'Parliamentary')
+    if params[:constituency_id]
+      @constituency = Constituency.find(params[:constituency_id])
+      @candidates = @constituency.candidates
+    else
+      @candidates = Candidate.all || []
+    end
+
+    @presidential_candidates = @constituency.candidates.where(candidate_type: 'Presidential') if @constituency
+    @parliamentary_candidates = @constituency.candidates.where(candidate_type: 'Parliamentary') if @constituency
   end
 
   # GET /constituencies/:constituency_id/candidates/new
@@ -16,12 +22,16 @@ class CandidatesController < ApplicationController
   # POST /constituencies/:constituency_id/candidates
   def create
     @candidate = @constituency.candidates.build(candidate_params)
+  
     if @candidate.save
+      # After the candidate is saved, create an initial vote record
+      @candidate.votes.create!(vote_count: params[:candidate][:vote_count].to_i) if params[:candidate][:vote_count].present?
+  
       redirect_to constituency_candidates_path(@constituency), notice: 'Candidate was successfully created.'
     else
       render :new
     end
-  end
+  end  
 
   # GET /constituencies/:constituency_id/candidates/:id
   def show
@@ -48,6 +58,12 @@ class CandidatesController < ApplicationController
     redirect_to constituency_candidates_path(@constituency), notice: 'Candidate was successfully destroyed.'
   end
 
+  # POST /constituencies/:constituency_id/candidates/:id/add_votes
+  def add_vote
+    @candidate.votes.create!(vote_count: params[:vote_count])
+    redirect_to constituency_candidate_path(@constituency, @candidate), notice: 'Votes were successfully added.'
+  end
+
   private
 
   # Set the constituency for the candidate
@@ -62,6 +78,6 @@ class CandidatesController < ApplicationController
 
   # Strong parameters to allow only certain attributes for candidates
   def candidate_params
-    params.require(:candidate).permit(:name, :party, :candidate_type, :image)
+    params.require(:candidate).permit(:name, :party, :candidate_type, :image, :position, :vote_count)
   end
 end

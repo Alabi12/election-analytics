@@ -2,7 +2,7 @@
   <td><%= candidate.name %></td>
   <td><%= candidate.party %></td>
   <td><%= candidate.constituency.name %></td>
-  <td id="candidate_<%= candidate.id %>_votes"><%= candidate.votes.count %></td>
+  <td id="candidate_<%= candidate.id %>_votes"><%= candidate.votes.sum(:vote_count) %></td>
   <td>
     <% if candidate.image.attached? %>
       <%= image_tag candidate.image, size: "50x50" %>

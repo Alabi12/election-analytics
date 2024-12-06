@@ -1,0 +1,13 @@
+<div class="container admin-dashboard my-5">
+  <h1 class="text-center mb-4 dashboard-title">Admin Dashboard</h1>
+
+  <div class="button-group text-center mb-4">
+    <%= link_to 'Manage Users', admin_users_path, class: 'btn custom-btn mx-2' %>
+    <%= link_to 'Manage Candidates', admin_candidates_path, class: 'btn custom-btn mx-2' %>
+    <%= link_to 'Manage Votes', admin_votes_path, class: 'btn custom-btn mx-2' %>
+  </div>
+
+  <div class="text-center">
+    <%= link_to 'Manage User Roles', admin_users_path, class: 'btn btn-primary custom-btn-main' %>
+  </div>
+</div>

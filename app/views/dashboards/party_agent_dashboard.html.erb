@@ -1,0 +1,22 @@
+<p>Welcome, Party Agent!</p>
+
+<% @constituencies.each do |constituency| %>
+  <h3><%= constituency.name %></h3>
+  <ul>
+    <% constituency.candidates.each do |candidate| %>
+      <li>
+        <%= candidate.name %> (<%= candidate.party %>)
+        - Votes: <%= candidate.votes.sum(:vote_count) %>
+
+        <!-- Form to input votes -->
+        <%= form_with(model: @votes, url: votes_path, local: true) do |form| %>
+          <%= form.hidden_field :candidate_id, value: candidate.id %>
+          <div class="form-group">
+            <%= form.number_field :vote_count, class: "form-control", placeholder: "Enter votes" %>
+          </div>
+          <%= form.submit "Submit Votes", class: "btn btn-primary" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

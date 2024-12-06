@@ -1,0 +1,31 @@
+<h1>Create New User</h1>
+
+<%= form_with model: @user, url: admin_users_path do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each { |message| concat(content_tag(:li, message)) } %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password %> <!-- Changed to password_field for better UX -->
+  </div>
+
+  <div>
+    <%= form.label :role %>
+    <%= form.select :role, User::ROLES.map { |role| [role.titleize, role] }, prompt: 'Select Role' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create User' %> <!-- Added text to the submit button for clarity -->
+  </div>
+<% end %>

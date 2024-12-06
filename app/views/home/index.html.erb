@@ -1,50 +1,49 @@
 <!-- app/views/home/index.html.erb -->
-<div class="container">
-  <div class="row mt-5">
-    <!-- Constituencies Section -->
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Constituencies</h5>
-          <p class="card-text">Manage constituencies and their candidates.</p>
-          <%= link_to 'View Constituencies', constituencies_path, class: 'btn btn-primary' %>
-        </div>
-      </div>
-    </div>
-
-    <!-- Candidates Section -->
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Candidates</h5>
-          <p class="card-text">Add, update, and view candidates in each constituency.</p>
-          
-          <!-- Link to Candidates in Each Constituency -->
-          <% Constituency.all.each do |constituency| %>
-            <div class="mb-2">
-              <%= link_to "View Candidates for #{constituency.name}", constituency_candidates_path(constituency), class: 'btn btn-primary' %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <!-- Data Analysis Section -->
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Data Analysis</h5>
-          <p class="card-text">Analyze and generate reports based on election data.</p>
-          <%= link_to 'View Analysis', '#', class: 'btn btn-primary' %> <!-- Update this link if you have an analysis page -->
-        </div>
-      </div>
-    </div>
-  </div>
-
+<div class="container my-5">
+  <!-- Header Section -->
   <div class="row">
     <div class="col-md-12 text-center">
-      <h2 class="mt-5">Welcome to the Election Analytics App</h2>
-      <p>This system helps you manage constituencies, candidates, and analyze election results efficiently.</p>
+      <h2 class="display-4 text-primary font-weight-bold mb-4">Welcome to the Election Analytics App</h2>
+      <p class="lead text-muted mb-5">This platform enables efficient management of constituencies, candidates, and detailed election result analysis.</p>
+      
+      <!-- Call to Action Button -->
+      <%= link_to 'Get Started', root_path, class: 'btn btn-lg btn-primary shadow-lg px-4 py-2' %>
+    </div>
+  </div>
+  
+  <!-- Features Section -->
+  <div class="row text-center mt-5">
+    <!-- Data Analytics Card -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-lg border-light rounded-lg">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Data Analytics</h5>
+          <p class="card-text text-muted">Analyze election data, track voting trends, and generate detailed reports with ease.</p>
+          <%= link_to 'View Analytics', '#', class: 'btn btn-outline-primary btn-lg shadow-sm' %>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Manage Candidates Card -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-lg border-light rounded-lg">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Manage Candidates</h5>
+          <p class="card-text text-muted">Add, edit, and view candidates seamlessly within their respective constituencies.</p>
+          <%= link_to 'Manage Candidates', '#', class: 'btn btn-outline-primary btn-lg shadow-sm' %>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Real-time Updates Card -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-lg border-light rounded-lg">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Real-time Updates</h5>
+          <p class="card-text text-muted">Get real-time vote counts and track election progress as it happens.</p>
+          <%= link_to 'Get Real-time Updates', '#', class: 'btn btn-outline-primary btn-lg shadow-sm' %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

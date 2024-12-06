@@ -1,0 +1,51 @@
+<div class="container my-5">
+  <h2 class="text-center mb-4">Election Analytics</h2>
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Total Election Stats -->
+      <div class="mb-4">
+        <h5 class="font-weight-bold">Total Election Stats</h5>
+        <ul class="list-group">
+          <li class="list-group-item">Total Candidates: <strong><%= @total_candidates %></strong></li>
+          <li class="list-group-item">Total Votes: <strong><%= @total_votes %></strong></li>
+        </ul>
+      </div>
+
+      <!-- Candidate Types Breakdown -->
+      <div class="mb-4">
+        <h5 class="font-weight-bold">Candidate Types Breakdown</h5>
+        <ul class="list-group">
+          <% @candidates_by_type.each do |type, count| %>
+            <li class="list-group-item"><%= type %>: <strong><%= count %></strong></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <!-- Candidate Votes and Percentages Table -->
+      <div class="mb-4">
+        <h5 class="font-weight-bold">Candidate Votes and Percentages</h5>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Candidate Type</th>
+              <th>Votes</th>
+              <th>Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @candidate_data.each do |data| %>
+              <tr>
+                <td><%= data[:name] %></td>
+                <td><%= data[:candidate_type] %></td>
+                <td><%= data[:vote_count] %></td>
+                <td><%= data[:vote_percentage] %>%</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

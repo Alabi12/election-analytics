@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <!-- Brand Name with Hover Effect -->
+    <a class="navbar-brand text-primary font-weight-bold" href="/">Election Analytics</a>
+    
+    <!-- Toggler Button for Small Screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        
+        <!-- Admin Links (Visible only when signed in as admin) -->
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to 'Admin Dashboard', admin_dashboard_path, class: "nav-link text-dark fw-bold" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Constituencies", constituencies_path, class: "nav-link text-dark fw-bold" %>
+            </li>
+            <% if @constituency %>
+              <li class="nav-item">
+                <%= link_to "View Candidates for #{@constituency.name}", constituency_candidates_path(@constituency), class: 'btn btn-primary' %>
+              </li>
+            <% end %>
+          <% elsif current_user.role == 'party_agent' %>
+            <li class="nav-item">
+              <%= link_to 'Party Agent Dashboard', party_agent_dashboard_path, class: "nav-link text-dark fw-bold" %>
+            </li>
+          <% end %>
+          
+          <!-- Sign Out Button -->
+          <li class="nav-item">
+            <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-link text-dark fw-bold" %>
+          </li>
+          
+        <!-- Non-Signed In Links -->
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Sign In', new_user_session_path, class: "nav-link text-dark fw-bold" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign Up', new_user_registration_path, class: "nav-link text-dark fw-bold" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

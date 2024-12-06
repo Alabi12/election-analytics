@@ -1,0 +1,12 @@
+<h1>Admin Dashboard</h1>
+
+<ul>
+  <li>
+    <%= link_to 'Create Constituency', new_constituency_path, class: 'btn btn-primary' %>
+  </li>
+  <% Constituency.all.each do |constituency| %>
+    <li>
+      <%= link_to "Create Candidate for #{constituency.name}", new_constituency_candidate_path(constituency), class: 'btn btn-primary' %>
+    </li>
+  <% end %>
+</ul>
