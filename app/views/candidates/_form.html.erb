@@ -1,20 +1,34 @@
-<%= form_with(model: [@constituency, @candidate], local: true) do |form| %>
+<%= form_with(model: @candidate, url: constituency_candidates_path(@constituency), local: true) do |form| %>
+  <% if @candidate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@candidate.errors.count, "error") %> prohibited this candidate from being saved:</h2>
+      <ul>
+        <% @candidate.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="form-group">
-    <%= form.label :name, 'Candidate Name' %>
+    <%= form.label :name %>
     <%= form.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :party, 'Political Party' %>
+    <%= form.label :party %>
     <%= form.text_field :party, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :bio, 'Candidate Bio' %>
-    <%= form.text_area :bio, class: 'form-control' %>
+    <%= form.label :candidate_type %>
+    <%= form.select :candidate_type, ['Presidential', 'Parliamentary'], prompt: 'Select Type', class: 'form-control' %>
   </div>
 
-  <%= form.submit 'Save Candidate', class: 'btn btn-success' %>
-<% end %>
+  <div class="form-group">
+    <%= form.label :image %>
+    <%= form.file_field :image, class: 'form-control' %>
+  </div>
 
-<%= link_to 'Back to Constituency', constituency_path(@constituency), class: 'btn btn-secondary mt-3' %>
+  <%= form.submit 'Create Candidate', class: 'btn btn-primary' %>
+<% end %>
