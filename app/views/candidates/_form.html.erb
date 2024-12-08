@@ -1,8 +1,9 @@
-<%= form_with(model: @candidate, url: constituency_candidates_path(@constituency), local: true) do |form| %>
+<%= form_with(model: @candidate, url: constituency_candidates_path(@constituency), local: true, class: 'needs-validation', novalidate: true) do |form| %>
+  <!-- Display Errors -->
   <% if @candidate.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@candidate.errors.count, "error") %> prohibited this candidate from being saved:</h2>
-      <ul>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(@candidate.errors.count, "error") %> prohibited this candidate from being saved:</h4>
+      <ul class="mb-0">
         <% @candidate.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -10,25 +11,33 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+  <!-- Name Input -->
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label fw-bold' %>
+    <%= form.text_field :name, class: 'form-control', placeholder: 'Enter candidate name' %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :party %>
-    <%= form.text_field :party, class: 'form-control' %>
+  <!-- Party Input -->
+  <div class="mb-3">
+    <%= form.label :party, class: 'form-label fw-bold' %>
+    <%= form.text_field :party, class: 'form-control', placeholder: 'Enter party name' %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :candidate_type %>
-    <%= form.select :candidate_type, ['Presidential', 'Parliamentary'], prompt: 'Select Type', class: 'form-control' %>
+  <!-- Candidate Type Select -->
+  <div class="mb-3">
+    <%= form.label :candidate_type, class: 'form-label fw-bold' %>
+    <%= form.select :candidate_type, ['Presidential', 'Parliamentary'], prompt: 'Select Type', class: 'form-select' %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :image %>
+  <!-- Image Upload -->
+  <div class="mb-3">
+    <%= form.label :image, class: 'form-label fw-bold' %>
     <%= form.file_field :image, class: 'form-control' %>
+    <small class="form-text text-muted">Upload a candidate image (optional).</small>
   </div>
 
-  <%= form.submit 'Create Candidate', class: 'btn btn-primary' %>
+  <!-- Submit Button -->
+  <div class="text-center">
+    <%= form.submit 'Create Candidate', class: 'btn btn-primary btn-lg px-4 shadow-sm' %>
+  </div>
 <% end %>

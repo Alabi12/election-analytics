@@ -1,0 +1,17 @@
+<h1 class="mb-4">Party Agents</h1>
+
+<div class="row">
+  <% @party_agents.each do |party_agent| %>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><%= party_agent.email %></h5>
+          
+          <div class="d-flex justify-content-between">
+            <%= link_to 'Edit Email', edit_party_agent_path(party_agent), class: 'btn btn-warning btn-sm' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

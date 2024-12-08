@@ -1,0 +1,23 @@
+<h1>Votes for <%= @candidate.name %></h1>
+<%= link_to 'New Vote', new_candidate_vote_path(@candidate), class: 'btn btn-success' %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Candidate Name</th>
+      <th>Vote Count</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @votes.each do |vote| %>
+      <tr>
+        <td><%= @candidate.name %></td>
+        <td><%= vote.vote_count %></td>
+        <td>
+          <%= link_to 'Edit', edit_candidate_vote_path(@candidate, vote) %> |
+          <%= link_to 'Delete', candidate_vote_path(@candidate, vote), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

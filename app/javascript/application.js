@@ -3,3 +3,7 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap"
 import "../stylesheets/application"
+import "./channels"
+import "chartkick"
+import "Chart.bundle" // For Chart.js
+

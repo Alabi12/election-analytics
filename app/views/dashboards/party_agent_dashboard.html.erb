@@ -1,0 +1,62 @@
+<!-- Party Agent Dashboard -->
+<div class="container my-5">
+  <h2 class="text-center mb-4">Welcome, Party Agent!</h2>
+
+  <!-- Search Form -->
+  <div class="mb-4">
+    <%= form_with(url: party_agent_dashboard_path, method: :get, local: true, class: "d-flex justify-content-center") do |f| %>
+      <div class="form-group mx-2">
+        <%= f.label :constituency_name, "Search by Constituency", class: "form-label" %>
+        <%= f.text_field :constituency_name, class: "form-control", placeholder: "Enter constituency name" %>
+      </div>
+      <div class="form-group mx-2">
+        <%= f.label :candidate_name, "Search by Candidate", class: "form-label" %>
+        <%= f.text_field :candidate_name, class: "form-control", placeholder: "Enter candidate name" %>
+      </div>
+      <div class="form-group mx-2">
+        <%= f.submit "Search", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Flex Container for Constituencies -->
+  <div class="d-flex flex-wrap justify-content-between">
+    <% @constituencies.each do |constituency| %>
+      <!-- Only show constituency if it matches search criteria -->
+      <% if constituency.name.downcase.include?(params[:constituency_name].to_s.downcase) %>
+        <div class="w-100 mb-4">
+          <h3 class="text-primary mb-3"><%= constituency.name %></h3>
+
+          <!-- Flexbox Row for Candidates -->
+          <div class="d-flex flex-column gap-4">
+            <% constituency.candidates.each do |candidate| %>
+              <!-- Only show candidate if it matches search criteria -->
+              <% if candidate.name.downcase.include?(params[:candidate_name].to_s.downcase) %>
+                <div class="card shadow-sm">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= candidate.name %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= candidate.party %></h6>
+                    <p class="card-text mb-2">Votes: <%= candidate.votes.sum(:vote_count) %></p>
+
+                    <!-- Form to input votes -->
+                    <%= form_with(model: @votes, url: votes_path, local: true) do |form| %>
+                      <%= form.hidden_field :candidate_id, value: candidate.id %>
+
+                      <!-- Vote Count Input -->
+                      <div class="form-group mb-3">
+                        <%= form.number_field :vote_count, class: "form-control", placeholder: "Enter votes" %>
+                      </div>
+
+                      <!-- Submit Button -->
+                      <%= form.submit "Submit Votes", class: "btn btn-primary" %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

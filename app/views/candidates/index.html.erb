@@ -1,71 +1,65 @@
-<h2>Presidential Candidates</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Party</th>
-      <th>Constituency</th> <!-- Added this column -->
-      <th>Image</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="container my-5">
+  <!-- Presidential Candidates -->
+  <section class="mb-5">
+    <h2 class="text-primary mb-3">Presidential Candidates</h2>
+    <table class="table table-bordered table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Party</th>
+          <th>Constituency</th>
+          <th>Votes</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+  <% if @presidential_candidates.present? %>
     <% @presidential_candidates.each do |candidate| %>
-      <tr>
-        <td><%= candidate.name %></td>
-        <td><%= candidate.party %></td>
-        <td><%= candidate.constituency.name %></td> <!-- Display the constituency name -->
-        <td>
-          <% if candidate.image.attached? %>
-            <%= image_tag candidate.image, size: "50x50" %> <!-- Display the uploaded image -->
-          <% else %>
-            <p>No image uploaded</p>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to 'Show', constituency_candidate_path(@constituency, candidate) %> |
-          <%= link_to 'Edit', edit_constituency_candidate_path(@constituency, candidate) %> |
-          <%= link_to 'Delete', constituency_candidate_path(@constituency, candidate), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
+      <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
     <% end %>
-  </tbody>
-</table>
-
-<h2>Parliamentary Candidates</h2>
-<table class="table">
-  <thead>
+  <% else %>
     <tr>
-      <th>Name</th>
-      <th>Party</th>
-      <th>Constituency</th>
-      <th>Image</th>
-      <th>Actions</th>
+      <td colspan="5" class="text-center">No presidential candidates available for this constituency.</td>
     </tr>
-  </thead>
-  <tbody>
-    <% @parliamentary_candidates.each do |candidate| %>
-      <tr>
-        <td><%= candidate.name %></td>
-        <td><%= candidate.party %></td>
-        <td><%= candidate.constituency.name %></td>
-        <td>
-          <% if candidate.image.attached? %>
-            <%= image_tag candidate.image, size: "50x50" %> <!-- Display the uploaded image -->
-          <% else %>
-            <p>No image uploaded</p>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to 'Show', constituency_candidate_path(@constituency, candidate) %> |
-          <%= link_to 'Edit', edit_constituency_candidate_path(@constituency, candidate) %> |
-          <%= link_to 'Delete', constituency_candidate_path(@constituency, candidate), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% end %>
+</tbody>
+    </table>
+  </section>
 
-<div class="mt-3">
-  <%= link_to 'Create New Candidate', new_constituency_candidate_path(@constituency), class: 'btn btn-success' %>
+  <!-- Parliamentary Candidates -->
+  <section>
+    <h2 class="text-primary mb-3">Parliamentary Candidates</h2>
+    <table class="table table-bordered table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Party</th>
+          <th>Constituency</th>
+          <th>Votes</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+  <% if @parliamentary_candidates.present? %>
+    <% @parliamentary_candidates.each do |candidate| %>
+      <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="5" class="text-center">No parliamentary candidates available for this constituency.</td>
+    </tr>
+  <% end %>
+</tbody>
+    </table>
+  </section>
+
+  <div class="text-center mt-4">
+  <% if @constituency %>
+    <%= link_to 'Create New Candidate', new_constituency_candidate_path(@constituency), class: 'btn btn-success btn-lg px-4 shadow-sm' %>
+  <% else %>
+    <p>Please select a constituency to manage candidates.</p>
+  <% end %>
+</div>
 </div>

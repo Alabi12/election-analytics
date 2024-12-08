@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Election Analytics Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fa; /* Light gray for overall dashboard background */
+    }
+
+    h1, h2, h3 {
+      color: #2c3e50; /* Professional dark gray for headers */
+    }
+
+    .section-title {
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+      color: #34495e; /* Muted gray-blue for section titles */
+    }
+
+    .candidate-item, .constituency-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+
+    .candidate-item img, .constituency-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-right: 15px;
+      border: 1px solid #ccc;
+    }
+
+    .details {
+      flex-grow: 1;
+    }
+
+    .details h5 {
+      margin: 0 0 5px;
+      color: #2c3e50;
+      font-size: 1.25rem;
+    }
+
+    .details p {
+      margin: 0;
+      color: #5d6d7e;
+    }
+
+    .progress-container {
+      flex-basis: 20%;
+    }
+
+    .progress-container .progress {
+      height: 10px;
+      margin-top: 5px;
+      background: #eaecef;
+    }
+
+    .progress-bar {
+      font-size: 0.75rem;
+    }
+
+    .stats-row {
+      background: #e8f5e9; /* Light green for overall stats row background */
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">Election Analytics Dashboard</h1>
+
+    <!-- Total Stats -->
+    <div class="row stats-row mb-4 text-center">
+      <div class="col-md-6">
+        <h2>Total Candidates</h2>
+        <div class="display-4"><%= @total_candidates %></div>
+      </div>
+      <div class="col-md-6">
+        <h2>Total Votes</h2>
+        <div class="display-4"><%= @total_votes %></div>
+      </div>
+    </div>
+
+    <!-- Candidate Data -->
+    <h2 class="section-title">Candidate Data</h2>
+    <% @candidate_data.group_by { |c| c[:candidate_type] }.each do |type, candidates| %>
+      <h3 class="text-primary text-capitalize mb-3"><%= type %> Candidates</h3>
+      <% candidates.each do |candidate| %>
+        <div class="candidate-item">
+          <img src="<%= candidate[:image_url] %>" alt="<%= candidate[:name] %>">
+          <div class="details">
+            <h5><%= candidate[:name] %></h5>
+            <p><strong>Constituency:</strong> <%= candidate[:constituency_name] %></p>
+            <p><strong>Votes:</strong> <%= candidate[:vote_count] %></p>
+          </div>
+          <div class="progress-container">
+            <p class="text-end"><%= candidate[:vote_percentage] %>%</p>
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar" 
+                   style="width: <%= candidate[:vote_percentage] %>%;" 
+                   aria-valuenow="<%= candidate[:vote_percentage] %>" 
+                   aria-valuemin="0" 
+                   aria-valuemax="100">
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <!-- Constituency Analysis -->
+    <h2 class="section-title">Constituency Analysis</h2>
+    <% @candidates_by_constituency.each do |constituency| %>
+      <h3 class="text-primary mb-3"><%= constituency[:name] %></h3>
+
+      <!-- Presidential Candidates -->
+      <h4 class="text-muted mb-2">Presidential Candidates</h4>
+      <% constituency[:presidential_candidates].each do |candidate| %>
+        <div class="constituency-item">
+          <img src="<%= candidate[:image_url] %>" alt="<%= candidate[:name] %>">
+          <div class="details">
+            <h5><%= candidate[:name] %></h5>
+            <p><strong>Votes:</strong> <%= candidate[:vote_count] %></p>
+          </div>
+          <div class="progress-container">
+            <p class="text-end"><%= candidate[:vote_percentage] %>%</p>
+            <div class="progress">
+              <div class="progress-bar bg-primary" role="progressbar" 
+                   style="width: <%= candidate[:vote_percentage] %>%;" 
+                   aria-valuenow="<%= candidate[:vote_percentage] %>" 
+                   aria-valuemin="0" 
+                   aria-valuemax="100">
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Add Similar Section for Parliamentary Candidates -->
+      <% if constituency[:parliamentary_candidates].present? %>
+        <h4 class="text-muted mb-2 mt-3">Parliamentary Candidates</h4>
+        <% constituency[:parliamentary_candidates].each do |candidate| %>
+          <div class="constituency-item">
+            <img src="<%= candidate[:image_url] %>" alt="<%= candidate[:name] %>">
+            <div class="details">
+              <h5><%= candidate[:name] %></h5>
+              <p><strong>Votes:</strong> <%= candidate[:vote_count] %></p>
+            </div>
+            <div class="progress-container">
+              <p class="text-end"><%= candidate[:vote_percentage] %>%</p>
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" 
+                     style="width: <%= candidate[:vote_percentage] %>%;" 
+                     aria-valuenow="<%= candidate[:vote_percentage] %>" 
+                     aria-valuemin="0" 
+                     aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

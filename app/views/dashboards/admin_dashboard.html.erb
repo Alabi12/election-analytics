@@ -1,0 +1,18 @@
+<!-- Admin Dashboard -->
+<div class="container my-5">
+  <h1 class="text-center mb-4">Admin Dashboard</h1>
+
+  <div class="list-group">
+    <!-- Create Constituency Button -->
+    <div class="mb-3">
+      <%= link_to 'Create Constituency', new_constituency_path, class: 'btn btn-lg btn-primary shadow-lg w-100' %>
+    </div>
+
+    <!-- List Constituencies and Create Candidate Links -->
+    <% Constituency.all.each do |constituency| %>
+      <div class="mb-3">
+        <%= link_to "Create Candidate for #{constituency.name}", new_constituency_candidate_path(constituency), class: 'btn btn-lg btn-outline-primary shadow-lg w-100' %>
+      </div>
+    <% end %>
+  </div>
+</div>

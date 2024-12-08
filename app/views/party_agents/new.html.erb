@@ -1,0 +1,39 @@
+<h1 class="mb-4">Create Party Agent</h1>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <%= form_with model: @party_agent, url: party_agents_path, local: true do |form| %>
+      
+      <% if @party_agent.errors.any? %>
+        <div class="alert alert-danger">
+          <h4 class="alert-heading">There were errors with your submission:</h4>
+          <ul>
+            <% @party_agent.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group mb-3">
+        <%= form.label :email, 'Email Address' %>
+        <%= form.email_field :email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= form.label :password, 'Password' %>
+        <%= form.password_field :password, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= form.label :password_confirmation, 'Confirm Password' %>
+        <%= form.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+
+      <div class="form-group text-center">
+        <%= form.submit 'Create Party Agent', class: 'btn btn-primary' %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
