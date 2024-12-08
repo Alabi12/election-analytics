@@ -12,32 +12,32 @@
   <% end %>
 
   <!-- Name Input -->
-  <div class="mb-3">
-    <%= form.label :name, class: 'form-label fw-bold' %>
-    <%= form.text_field :name, class: 'form-control', placeholder: 'Enter candidate name' %>
+  <div class="mb-4">
+    <%= form.label :name, class: 'form-label fw-bold text-dark' %>
+    <%= form.text_field :name, class: 'form-control form-control-lg shadow-sm', placeholder: 'Enter candidate name' %>
   </div>
 
   <!-- Party Input -->
-  <div class="mb-3">
-    <%= form.label :party, class: 'form-label fw-bold' %>
-    <%= form.text_field :party, class: 'form-control', placeholder: 'Enter party name' %>
+  <div class="mb-4">
+    <%= form.label :party, class: 'form-label fw-bold text-dark' %>
+    <%= form.text_field :party, class: 'form-control form-control-lg shadow-sm', placeholder: 'Enter party name' %>
   </div>
 
   <!-- Candidate Type Select -->
-  <div class="mb-3">
-    <%= form.label :candidate_type, class: 'form-label fw-bold' %>
-    <%= form.select :candidate_type, ['Presidential', 'Parliamentary'], prompt: 'Select Type', class: 'form-select' %>
+  <div class="mb-4">
+    <%= form.label :candidate_type, class: 'form-label fw-bold text-dark' %>
+    <%= form.select :candidate_type, ['Presidential', 'Parliamentary'], prompt: 'Select Candidate Type', class: 'form-select form-select-lg shadow-sm' %>
   </div>
 
   <!-- Image Upload -->
-  <div class="mb-3">
-    <%= form.label :image, class: 'form-label fw-bold' %>
-    <%= form.file_field :image, class: 'form-control' %>
+  <div class="mb-4">
+    <%= form.label :image, class: 'form-label fw-bold text-dark' %>
+    <%= form.file_field :image, class: 'form-control form-control-lg shadow-sm' %>
     <small class="form-text text-muted">Upload a candidate image (optional).</small>
   </div>
 
   <!-- Submit Button -->
-  <div class="text-center">
-    <%= form.submit 'Create Candidate', class: 'btn btn-primary btn-lg px-4 shadow-sm' %>
+  <div class="text-center mt-4">
+    <%= form.submit 'Create Candidate', class: 'btn btn-primary btn-lg px-5 py-3 shadow-sm' %>
   </div>
 <% end %>
