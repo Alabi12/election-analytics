@@ -155,3 +155,39 @@ h1 {
   color: white;
   text-decoration: none;  /* Removes underline on hover */
 }
+
+/* Custom Styles for Candidate Sections */
+.bg-primary {
+  background-color: #007bff !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.card-body ul li {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  margin-left: 10px;
+}
+
+h6 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.list-group-item {
+  background-color: #f8f9fa;
+}
+

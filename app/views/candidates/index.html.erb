@@ -14,10 +14,16 @@
         </tr>
       </thead>
       <tbody>
-        <% @presidential_candidates.each do |candidate| %>
-          <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
-        <% end %>
-      </tbody>
+  <% if @presidential_candidates.present? %>
+    <% @presidential_candidates.each do |candidate| %>
+      <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="5" class="text-center">No presidential candidates available for this constituency.</td>
+    </tr>
+  <% end %>
+</tbody>
     </table>
   </section>
 
@@ -36,15 +42,24 @@
         </tr>
       </thead>
       <tbody>
-        <% @parliamentary_candidates.each do |candidate| %>
-          <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
-        <% end %>
-      </tbody>
+  <% if @parliamentary_candidates.present? %>
+    <% @parliamentary_candidates.each do |candidate| %>
+      <%= render partial: 'candidate_row', locals: { candidate: candidate } %>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="5" class="text-center">No parliamentary candidates available for this constituency.</td>
+    </tr>
+  <% end %>
+</tbody>
     </table>
   </section>
 
-  <!-- Create New Candidate Button -->
   <div class="text-center mt-4">
+  <% if @constituency %>
     <%= link_to 'Create New Candidate', new_constituency_candidate_path(@constituency), class: 'btn btn-success btn-lg px-4 shadow-sm' %>
-  </div>
+  <% else %>
+    <p>Please select a constituency to manage candidates.</p>
+  <% end %>
+</div>
 </div>

@@ -1,9 +1,12 @@
 # config/routes.rb
 
 Rails.application.routes.draw do
+  get "analytics/dashboard"
   # Devise Authentication Routes
   devise_for :users
   
+  get 'updates/live', to: 'updates#live'
+
   # Root path
   root 'home#index'
 
@@ -25,6 +28,9 @@ Rails.application.routes.draw do
   # Routes for the dashboards
   get 'admin_dashboard', to: 'dashboards#admin_dashboard', as: 'admin_dashboard'
   get 'party_agent_dashboard', to: 'dashboards#party_agent_dashboard'
+  get 'real_time_updates', to: 'updates#live', as: 'real_time_updates'
+
+
 
   resources :party_agents
 

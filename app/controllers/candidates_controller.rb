@@ -1,17 +1,20 @@
 class CandidatesController < ApplicationController
   before_action :set_constituency
   before_action :set_candidate, only: [:show, :edit, :update, :destroy, :add_vote]
+  before_action :authenticate_admin!, only: [:index, :show, :edit, :update, :destroy]
 
   def index
-    if params[:constituency_id]
-      @constituency = Constituency.find(params[:constituency_id])
+    # If constituency_id is present, find the constituency and set candidates
+    if params[:constituency_id].present? && @constituency
       @candidates = @constituency.candidates
+      @presidential_candidates = @constituency.candidates.where(candidate_type: 'Presidential')
+      @parliamentary_candidates = @constituency.candidates.where(candidate_type: 'Parliamentary')
     else
+      # If no constituency is found, fall back to all candidates or redirect
       @candidates = Candidate.all || []
+      @presidential_candidates = []
+      @parliamentary_candidates = []
     end
-
-    @presidential_candidates = @constituency.candidates.where(candidate_type: 'Presidential') if @constituency
-    @parliamentary_candidates = @constituency.candidates.where(candidate_type: 'Parliamentary') if @constituency
   end
 
   # GET /constituencies/:constituency_id/candidates/new
@@ -68,8 +71,15 @@ class CandidatesController < ApplicationController
 
   # Set the constituency for the candidate
   def set_constituency
-    @constituency = Constituency.find(params[:constituency_id])
-  end
+    # Try to find the constituency, but rescue from the error if not found
+    @constituency = Constituency.find_by(id: params[:constituency_id])
+  
+    # # If the constituency was not found, redirect or render an error message
+    # unless @constituency
+    #   flash[:alert] = "Constituency not found"
+    #   redirect_to constituencies_path  # Redirect to a valid page (like the list of constituencies)
+    # end
+  end  
 
   # Set the candidate to be used for show, edit, update, destroy
   def set_candidate
@@ -79,5 +89,12 @@ class CandidatesController < ApplicationController
   # Strong parameters to allow only certain attributes for candidates
   def candidate_params
     params.require(:candidate).permit(:name, :party, :candidate_type, :image, :position, :vote_count)
+  end
+
+  def authenticate_admin!
+    unless user_signed_in? && current_user.admin?
+      flash[:alert] = "You must be an admin to access this page."
+      redirect_to root_path # Redirect to the home page or login page
+    end
   end
 end

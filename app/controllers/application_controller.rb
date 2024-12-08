@@ -8,5 +8,10 @@ class ApplicationController < ActionController::Base
     else
       root_path
     end
-  end  
+  end 
+  
+    # Check if the user is signed in
+  def user_signed_in?
+    current_user.present?
+  end
 end

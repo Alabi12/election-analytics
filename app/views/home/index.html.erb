@@ -1,4 +1,3 @@
-<!-- app/views/home/index.html.erb -->
 <div class="container my-5">
   <!-- Header Section -->
   <div class="row">
@@ -19,7 +18,7 @@
         <div class="card-body">
           <h5 class="card-title text-primary">Data Analytics</h5>
           <p class="card-text text-muted">Analyze election data, track voting trends, and generate detailed reports with ease.</p>
-          <%= link_to 'View Analytics', '#', class: 'btn btn-outline-primary btn-lg shadow-sm' %>
+          <%= link_to 'View Analytics', analytics_dashboard_path, class: 'btn btn-outline-primary btn-lg shadow-sm' %>
         </div>
       </div>
     </div>
@@ -29,8 +28,13 @@
       <div class="card shadow-lg border-light rounded-lg">
         <div class="card-body">
           <h5 class="card-title text-primary">Manage Candidates</h5>
-          <p class="card-text text-muted">Add, edit, and view candidates seamlessly within their respective constituencies.</p>
-          <%= link_to 'Manage Candidates', '#', class: 'btn btn-outline-primary btn-lg shadow-sm' %>
+          <% if user_signed_in? && current_user.admin? %>
+            <p class="card-text text-muted">Add, edit, and view candidates seamlessly within their respective constituencies.</p>
+            <%= link_to 'Manage Candidates', candidates_path, class: 'btn btn-outline-success btn-lg shadow-sm' %>
+          <% else %>
+            <p class="text-warning">You must be logged in as an admin to manage candidates.</p>
+            <%= link_to 'Log in as Admin', new_user_session_path, class: 'btn btn-outline-warning btn-lg shadow-sm' %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -41,7 +45,7 @@
         <div class="card-body">
           <h5 class="card-title text-primary">Real-time Updates</h5>
           <p class="card-text text-muted">Get real-time vote counts and track election progress as it happens.</p>
-          <%= link_to 'Get Real-time Updates', '#', class: 'btn btn-outline-primary btn-lg shadow-sm' %>
+          <%= link_to 'Get Real-time Updates', real_time_updates_path, class: 'btn btn-outline-primary btn-lg shadow-sm' %>
         </div>
       </div>
     </div>

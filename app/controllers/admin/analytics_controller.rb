@@ -22,7 +22,7 @@ class Admin::AnalyticsController < ApplicationController
       }
     end
   end
-
+  
   private
 
   # Ensure the user is an admin

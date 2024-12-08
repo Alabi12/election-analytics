@@ -7,45 +7,62 @@
       <div class="mb-4">
         <h5 class="font-weight-bold">Total Election Stats</h5>
         <ul class="list-group">
-          <li class="list-group-item">Total Candidates: <strong><%= @total_candidates %></strong></li>
-          <li class="list-group-item">Total Votes: <strong><%= @total_votes %></strong></li>
+          <li class="list-group-item">Total Candidates: <strong><%= @total_candidates || 0 %></strong></li>
+          <li class="list-group-item">Total Votes: <strong><%= @total_votes || 0 %></strong></li>
         </ul>
       </div>
 
       <!-- Candidate Types Breakdown -->
       <div class="mb-4">
         <h5 class="font-weight-bold">Candidate Types Breakdown</h5>
-        <ul class="list-group">
-          <% @candidates_by_type.each do |type, count| %>
-            <li class="list-group-item"><%= type %>: <strong><%= count %></strong></li>
-          <% end %>
-        </ul>
+        <% if @candidates_by_type.present? %>
+          <ul class="list-group">
+            <% @candidates_by_type.each do |type, count| %>
+              <li class="list-group-item"><%= type.presence || "Unknown" %>: <strong><%= count %></strong></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>No candidate types found.</p>
+        <% end %>
       </div>
 
       <!-- Candidate Votes and Percentages Table -->
       <div class="mb-4">
         <h5 class="font-weight-bold">Candidate Votes and Percentages</h5>
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Candidate Type</th>
-              <th>Votes</th>
-              <th>Percentage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @candidate_data.each do |data| %>
+        <% if @candidate_data.present? %>
+          <table class="table table-bordered table-hover">
+            <thead>
               <tr>
-                <td><%= data[:name] %></td>
-                <td><%= data[:candidate_type] %></td>
-                <td><%= data[:vote_count] %></td>
-                <td><%= data[:vote_percentage] %>%</td>
+                <th>Name</th>
+                <th>Candidate Type</th>
+                <th>Votes</th>
+                <th>Percentage</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% @candidate_data.each do |data| %>
+                <tr>
+                  <td><%= data[:name] %></td>
+                  <td><%= data[:candidate_type] || "Unknown" %></td>
+                  <td><%= data[:vote_count] || 0 %></td>
+                  <td><%= data[:vote_percentage] || 0 %>%</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>No candidate data available.</p>
+        <% end %>
       </div>
     </div>
   </div>
+
+  <!-- Votes Bar Chart -->
+  <% if @votes_by_constituency.present? %>
+    <div class="mt-5">
+      <%= bar_chart @votes_by_constituency.map { |data| [data[:name], data[:votes]] } %>
+    </div>
+  <% else %>
+    <p>No votes data available for the bar chart.</p>
+  <% end %>
 </div>
